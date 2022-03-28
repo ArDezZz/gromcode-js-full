@@ -62,20 +62,32 @@
 
 // console.log(sortContacts(contacts, true));
 //====================task3===============
-const splitText = (text, len = 10) => {
-  const strArr = [];
-  let startPosition = 0;
-  if (text !== String(text)) {
+// const splitString = (text, len = 10) => {
+//   const strArr = [];
+//   let startPosition = 0;
+//   if (text !== String(text)) {
+//     return null;
+//   }
+//   while (true) {
+//     let chunk = text.substr(startPosition, len);
+//     if (chunk.length === 0) {
+//       break;
+//     }
+//     if (chunk.length < len) {
+//       chunk = chunk.concat('.'.repeat(len - chunk.length));
+//     }
+//     strArr.push(chunk);
+//     startPosition += len;
+//   }
+//   return strArr;
+// };
+// console.log(splitString('abcd efgh', 4));
+//=====================task4==============
+const countOccurrences = (text, str) => {
+  if (str === '') {
     return null;
   }
-  while (true) {
-    let chunk = text.substr(startPosition, len);
-    if (chunk.length === 0) {
-      break;
-    }
-    strArr.push(chunk[0].toUpperCase() + chunk.slice(1));
-    startPosition += len;
-  }
-  return strArr.join('\n');
+  return text.split(str).length - 1;
 };
-console.log(splitText('some message with the text'));
+const result = countOccurrences('i write some text for test test test', 'test');
+console.log(result);
