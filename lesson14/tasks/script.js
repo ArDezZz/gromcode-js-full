@@ -57,8 +57,8 @@
 // messanger3.setSender('Anna');
 // messanger3.sendMessage('Alex'); // ===> Hello, Alex! The weather is amazing today! This message was sent by Anna
 //=============================task3==============================
-let number = 0;
-export const add = n1 => (number += n1);
-export const decrease = n2 => (number -= n2);
-export const reset = () => (number = 0);
-export const getMemo = () => number;
+// let number = 0;
+// export const add = n1 => (number += n1);
+// export const decrease = n2 => (number -= n2);
+// export const reset = () => (number = 0);
+// export const getMemo = () => number;
