@@ -46,18 +46,8 @@
 // 2)every el of array will have "$" and will have a two decimal places
 // 3) output new array with edit.
 // 4) starter array will not have an edit.
-const cleanTransactionsList = arr => {
-  const resArr = [];
-  const timeArr = arr.slice();
-  for (const el of timeArr) {
-    if (isNaN(el)) {
-      continue;
-    }
-    resArr.push('$'.concat((Math.ceil(el * 100) / 100).toFixed(2)));
-  }
-  return resArr;
-};
-// const cleanTransactionsList = arr =>
-//   arr.map(el => (isNaN(el) ?  : '$'.concat((Math.ceil(el * 100) / 100).toFixed(2))));
-const arr = ['1.9', '16.4', '17  ', '1 dollar', '123 //'];
-console.log(cleanTransactionsList(arr));
+const cleanTransactionsList = arr =>
+  arr.filter(el => !Number.isNaN(+el)).map(el => `$${Number(el).toFixed(2)}`);
+
+const arr1 = ['1.9', '16.4', '17  ', '1 dollar', '123 //'];
+console.log(cleanTransactionsList(arr1));
