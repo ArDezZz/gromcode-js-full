@@ -6,90 +6,79 @@
 // const { exceedsLimit } = require('prettier');
 'use strict';
 //=====================task1===================
-// export const makeCounter = () => {
-//   let count = 0;
-//   return function () {
-//     return count++;
-//   }
+// const event = {
+//   guests: [
+//     { name: 'Tom', age: 17, email: 'T@gmail.com' },
+//     { name: 'Bob', age: 18, email: 'b@gmail.com' },
+//   ],
+//   message: 'Welcome to the party!',
+//   getInvitations() {
+//     return this.guests
+//       .filter(({ age }) => age >= 18)
+//       .map(({ name, email }) => ({
+//         email,
+//         message: `Dear ${name}! ${this.message}`,
+//       }));
+//   },
 // };
-// const counter1 = makeCounter();
-// const counter2 = makeCounter();
-// console.log(counter1());
-// console.log(counter1());
-// console.log(counter2());
-// console.log(counter1());
-// console.log(counter2());
-//======================task2===================
-// input: number
-// output: object
-// export function createCalculator() {
-//   let number = 0;
-//   function add(a) {
-//     number += a;
-//   }
-//   function decrease(b) {
-//     number -= b;
-//   }
-//   function reset() {
-//     number = 0;
-//   }
-//   function getMemo() {
-//     return number;
-//   }
-//   return {
-//     add,
-//     decrease,
-//     reset,
-//     getMemo,
-//   };
-// }
-// const calc = createCalculator();
-// console.log(calc());
-//=========================task3==================
-'use strict';
 
-/**
- * @return {object}
- */
-export const createLogger = () => {
-  let memory = [];
-  let warn = text => memory.unshift({ message: text, dateTime: new Date(), type: 'warn' });
-  let error = text => memory.unshift({ message: text, dateTime: new Date(), type: 'error' });
-  let log = text => memory.unshift({ message: text, dateTime: new Date(), type: 'log' });
-  let getRecords = text => {
-    if (text == 'warn') return memory.filter(obj => obj.type == 'warn');
-    if (text == 'error') return memory.filter(obj => obj.type == 'error');
-    if (text == 'log') return memory.filter(obj => obj.type == 'log');
-    return memory;
-  };
-  let logout = {
-    warn,
-    error,
-    log,
-    getRecords,
-    memory,
-  };
-  return logout;
+// console.log(event.getInvitations());
+//===============task2=======================
+// const wallet = {
+//   transactions: [1, 2, 3, 5, 6, 676, 4332, 646456, 34, -9],
+//   getMax() {
+//     return Math.max(...this.transactions);
+//   },
+//   getMin() {
+//     return Math.min(...this.transactions);
+//   },
+// };
+// console.log(wallet.getMax());
+// console.log(wallet.getMin());
+//===================task3=====
+// function sumOfSquares() {
+//   return [...arguments].reduce((acc, el) => el * el + acc);
+// }
+// console.log(sumOfSquares(1, 2, 3));
+//========================task4================
+
+function saveFuncCalls(func) {
+  // put your code here
+}
+
+// example 1
+function sum(firstNum, secondNum) {
+  return firstNum + secondNum;
+}
+
+const sumWithMemory = saveFuncCalls(sum);
+sumWithMemory(4, 2); // ===> 6
+sumWithMemory(9, 1); // ===> 10
+
+sumWithMemory.calls; // ===> [ [4, 2], [9, 1] ]
+
+// example 2
+function addDelta(array, delta) {
+  return array.map(el => el + delta);
+}
+
+const addDeltaWithMemory = saveFuncCalls(addDelta);
+addDeltaWithMemory([111, 22, 55, 4], 8); // ===> [119, 30, 63, 12]
+addDeltaWithMemory([9, 1, -8, 15, 7, 0], 7); // ===> [16, 8, -1, 22, 14, 7]
+
+addDeltaWithMemory.calls; // ===> [ [[111, 22, 55, 4], 8], [[9, 1, -8, 15, 7, 0], 7] ]
+
+// example 3
+const user = {
+  name: 'John',
+  sayHi() {
+    return this.name;
+  },
 };
 
-// examples
-const logger1 = createLogger();
-logger1.log('User logged in');
-logger1.warn('User is tring to ented restricted page');
-logger1.log('User logged out');
-logger1.error('Unexpected error on the site');
+const sayHiWithMemory = saveFuncCalls(user.sayHi);
+sayHiWithMemory(); // ===> throw error // because sayHiWithMemory lost context
+const sayHiWithMemoryBinded = sayHiWithMemory.bind({ name: 'Tom' });
+console.log(sayHiWithMemoryBinded()); // ===> Tom // because we fixed context with bind and run functon again
 
-console.log(logger1.getRecords()); // ===> [{ message: 'Unexpected error on the site', type: 'error', dateTime: Date }, { message: 'User logged out', type: 'log', dateTime: Date }, { message: 'User is tring to ented restricted page', type: 'warn', dateTime: Date }, { message: 'User logged in', type: 'log', dateTime: Date }]
-logger1.getRecords('log'); // ===> [{ message: 'User logged out', type: 'log', dateTime: Date }, { message: 'User logged in', type: 'log', dateTime: Date }]
-logger1.getRecords('error'); // ===> [{ message: 'Unexpected error on the site', type: 'error', dateTime: Date }]
-logger1.getRecords('warn'); // ===> [{ message: 'User is tring to ented restricted page', type: 'warn', dateTime: Date }]
-
-const logger2 = createLogger();
-logger2.warn('Opps, something is happenning');
-logger2.getRecords('error'); // ===> []
-logger2.getRecords('warn'); // ===> [{ message: 'Opps, something is happenning', type: 'warn', dateTime: Date }]
-logger2.getRecords(); // ===> [{ message: 'Opps, something is happenning', type: 'warn', dateTime: Date }]
-
-const logger3 = createLogger();
-logger3.getRecords('error'); // ===> []
-logger3.getRecords(); // ===> []
+console.log(sayHiWithMemory.calls); // [ [] ]
