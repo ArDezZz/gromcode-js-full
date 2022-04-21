@@ -21,3 +21,4 @@ export const getGoal = () => {
   return elemGoal.outerHTML;
 };
 console.log(getGoal());
+//
