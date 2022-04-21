@@ -1,3 +1,3 @@
 export function setTitle(text) {
-  text.querySelector('.title').textContent;
+  return text.querySelector('.title').textContent;
 }
