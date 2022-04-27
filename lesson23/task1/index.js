@@ -1,37 +1,67 @@
-'use strict';
+// так можно получить данные формы - ВАРИАНТ 1:
+// eslint-disable-next-line no-undef
+const formFields = [...new FormData(formElem)];
+// formFields => [["email", "значение поля email"], ["password", "значение поля password"]]
 
-export const tasks = [
-  { text: 'Buy milk', done: false },
-  { text: 'Pick up Tom from airport', done: false },
-  { text: 'Visit party', done: false },
-  { text: 'Visit doctor', done: true },
-  { text: 'Buy meat', done: true },
-];
+const formData = formFields.reduce(function (acc, formField) {
+  const prop = formField[0]; // здесь "name" инпута
+  const value = formField[1]; // здесь "value" инпута
+  // если использовать деструктуризацию, то можно предыдущие 2 строки записать короче
+  // const [prop, value] = formField;
+  return {
+    // используем оператор расширения, чтобы в acc добвить свойства все предыдущих итераций
+    ...acc,
+    // используем вычислимое свойство объекта, чтобы добавить в аккумулятор новое свойство
+    [prop]: value,
+  };
+}, {});
 
-/**
- * @param {object[]} tasksList
- * @return {undefined}
- */
-export const renderTasks = listItems => {
-  const listElem = document.querySelector('.list');
+//более простой формат считывания формы - ВАРИАНТ 2:
+const formData1 = Object.fromEntries(new FormData(formElem));
 
-  const listItemElems = listItems
-    .sort((a, b) => a.done - b.done)
-    .map(({ text, done }) => {
-      const listItemElem = document.createElement('li');
-      const checkboxElem = document.createElement('input');
-      listItemElem.classList.add('list__item');
-      checkboxElem.classList.add('list__item-checkbox');
-      if (done) {
-        listItemElem.classList.add('list__item_done');
-      }
-      checkboxElem.setAttribute('type', 'checkbox');
-      checkboxElem.checked = done;
-      listItemElem.append(checkboxElem, text);
+// const emailInputElem = document.querySelector('#email');
+// const passwordInputElem = document.querySelector('#password');
+// const emailErrorElem = document.querySelector('.error-text_email');
+// const passwordErrorElem = document.querySelector('.error-text_password');
 
-      return listItemElem;
-    });
-  listElem.append(...listItemElems);
-};
+// const isRequired = value => (value ? undefined : 'Required');
+// const isEmail = value => (value.includes('@') ? undefined : 'Should be an Email');
 
-renderTasks(tasks);
+// const validatorsByField = {
+//   email: [isRequired, isEmail],
+//   password: [isRequired],
+// };
+
+// const validate = (fieldName, value) => {
+//   const validators = validatorsByField[fieldName];
+//   return validators
+//     .map(validator => validator(value))
+//     .filter(errorText => errorText)
+//     .join(',');
+// };
+
+// const onEmailChange = event => {
+//   const errorText = validate('email', event.target.value);
+//   emailErrorElem.textContent = errorText;
+// };
+
+// const onPasswordChange = event => {
+//   const errorText = validate('password', event.target.value);
+//   passwordErrorElem.textContent = errorText;
+// };
+
+// emailInputElem.addEventListener('input', onEmailChange);
+// passwordInputElem.addEventListener('input', onPasswordChange);
+
+// const formElem = document.querySelector('.login-form');
+
+// const onForSubmit = event => {
+//   event.preventDefault();
+//   const formData = [...new FormData(formElem)].reduce(
+//     (acc, [field, value]) => ({ ...acc, [field]: value }),
+//     {},
+//   );
+//   alert(JSON.stringify(formData));
+// };
+
+// formElem.addEventListener('submit', onForSubmit);
