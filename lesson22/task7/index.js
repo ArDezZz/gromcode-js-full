@@ -1,5 +1,12 @@
-export function clearList() {
-  let elemDelete = document.querySelector('.categories');
-  elemDelete.innerHTML = '';
+const btn = document.querySelectorAll('.btn');
+
+// function fnc1(event) {
+//   console.log(event.target.textContent);
+// }
+function fnc2() {
+  console.log(this.textContent);
 }
-clearList();
+
+[...btn].map(el => {
+  el.addEventListener('click', fnc2);
+});

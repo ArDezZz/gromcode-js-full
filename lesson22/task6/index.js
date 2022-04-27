@@ -1,7 +1,9 @@
-export function setButton(buttonText) {
-  let elemBody = document.querySelector('body');
-  let createElement = document.createElement('button');
-  elemBody.append(createElement);
-  createElement.textContent = buttonText;
+const elemButton = document.querySelector('.single-use-btn');
+
+function clickBtn() {
+  console.log(`clicked`);
+  console.log(this);
+  this.removeEventListener('click', clickBtn);
 }
-setButton('YO');
+
+elemButton.addEventListener('click', clickBtn);
