@@ -37,30 +37,31 @@ const renderTasks = tasksList => {
 
 renderTasks(tasks);
 
-const changeTaskStatus = event => {
-  const taskId = Number(event.target.dataset.id);
-  const currentTask = tasks.find(task => task.id === taskId);
+const taskStatusHandler = event => {
+  const taskId = event.target.dataset.id;
+  const currentTask = tasks.find(task => task.id === +taskId);
   currentTask.done = !currentTask.done;
   renderTasks(tasks);
 };
 
-listElem.addEventListener('click', changeTaskStatus);
+listElem.addEventListener('click', taskStatusHandler);
 
-const addTasks = () => {
+const createTaskHandler = () => {
   const inputElem = document.querySelector('.task-input');
-  const object = {};
   const newInput = inputElem.value;
 
   if (!newInput) {
     return;
   }
 
-  object.text = newInput;
-  object.done = false;
-  object.id = tasks.length + 1;
-  tasks.unshift(object);
+  tasks.push({
+    text: newInput,
+    done: false,
+    id: tasks.length + 1,
+  });
+
   inputElem.value = '';
   renderTasks(tasks);
 };
 
-buttonELem.addEventListener('click', addTasks);
+buttonELem.addEventListener('click', createTaskHandler);
