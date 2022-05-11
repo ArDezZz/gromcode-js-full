@@ -24,7 +24,7 @@ successPromise
  */
 successPromise
   .then(number => {
-    return number;
+    return number * 10;
   })
   .then(result => {
     console.log(result); // 320
