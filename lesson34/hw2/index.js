@@ -28,10 +28,11 @@ const sendDataHandler = () => {
     name: elemsInputName.value,
     password: elemsInputPass.value,
   };
-  sendDataToServer(res).then();
-  elemsInputEmail.value = '';
-  elemsInputName.value = '';
-  elemsInputPass.value = '';
+  sendDataToServer(res).then(() => {
+    elemsInputEmail.value = '';
+    elemsInputName.value = '';
+    elemsInputPass.value = '';
+  });
 };
 
 form.addEventListener('submit', e => {
