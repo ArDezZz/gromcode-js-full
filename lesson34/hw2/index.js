@@ -28,12 +28,9 @@ const sendDataHandler = () => {
     name: elemsInputName.value,
     password: elemsInputPass.value,
   };
-  sendDataToServer(res).then(res => {
-    alert(res);
-    elemsInputEmail.value = '';
-    elemsInputName.value = '';
-    elemsInputPass.value = '';
-  });
+  sendDataToServer(res)
+    .then(response => response.json())
+    .then(result => alert(JSON.stringify(result)));
 };
 
 form.addEventListener('submit', e => {
