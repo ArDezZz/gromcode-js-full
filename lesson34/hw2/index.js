@@ -28,20 +28,22 @@ const sendDataHandler = () => {
     name: elemsInputName.value,
     password: elemsInputPass.value,
   };
-  sendDataToServer(res).then(() => {
+  sendDataToServer(res).then(res => {
+    alert(res);
     elemsInputEmail.value = '';
     elemsInputName.value = '';
     elemsInputPass.value = '';
-    alert({
-      email: elemsInputEmail.value,
-      name: elemsInputName.value,
-      password: elemsInputPass.value,
-    });
   });
 };
 
 form.addEventListener('submit', e => {
   e.preventDefault();
 });
+
+const onInpForm = () => {
+  form.reportValidity() ? (btnRegister.disabled = false) : (btnRegister.disabled = true);
+};
+
+form.addEventListener('input', onInpForm);
 
 btnRegister.addEventListener('click', sendDataHandler);
