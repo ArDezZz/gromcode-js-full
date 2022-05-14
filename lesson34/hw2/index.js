@@ -19,22 +19,19 @@ function sendDataToServer(userData) {
   });
 }
 
-// if (elemsInputEmail.length > 0 && elemsInputName.length > 0 && elemsInputPass.length > 0) {
-//   btnRegister.removeAttribute('disabled');
-// }
-
 const sendDataHandler = () => {
-  let elemsInputEmail = document.querySelector('input[type=email]').value;
-  let elemsInputName = document.querySelector('input[type=text]').value;
-  let elemsInputPass = document.querySelector('input[type=password]').value;
+  let elemsInputEmail = document.querySelector('input[type=email]');
+  let elemsInputName = document.querySelector('input[type=text]');
+  let elemsInputPass = document.querySelector('input[type=password]');
   let res = {
-    email: elemsInputEmail,
-    name: elemsInputName,
-    password: elemsInputPass,
+    email: elemsInputEmail.value,
+    name: elemsInputName.value,
+    password: elemsInputPass.value,
   };
-  return sendDataToServer(res).then(res => {
-    alert(res);
-  });
+  sendDataToServer(res).then();
+  elemsInputEmail.value = '';
+  elemsInputName.value = '';
+  elemsInputPass.value = '';
 };
 
 form.addEventListener('submit', e => {
