@@ -30,7 +30,12 @@ const sendDataHandler = () => {
   };
   sendDataToServer(res)
     .then(response => response.json())
-    .then(result => alert(JSON.stringify(result)));
+    .then(result => {
+      alert(JSON.stringify(result));
+      elemsInputEmail.value = '';
+      elemsInputName.value = '';
+      elemsInputPass.value = '';
+    });
 };
 
 form.addEventListener('submit', e => {
