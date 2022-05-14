@@ -56,7 +56,7 @@ export function updateUser(userId, userData) {
 
 // const updatedUserData = {
 //   email: 'new@email.com',
-//   firstName: 'John',
+//   firstName: 'Vlad',
 //   lastName: 'Doe',
 //   age: 17,
 // };
@@ -65,6 +65,6 @@ export function updateUser(userId, userData) {
 //   console.log('User updated');
 // });
 
-// deleteUser('2').then(() => {
+// deleteUser('17').then(() => {
 //   console.log('User updated');
 // });
