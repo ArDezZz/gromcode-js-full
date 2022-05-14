@@ -32,6 +32,11 @@ const sendDataHandler = () => {
     elemsInputEmail.value = '';
     elemsInputName.value = '';
     elemsInputPass.value = '';
+    alert({
+      email: elemsInputEmail.value,
+      name: elemsInputName.value,
+      password: elemsInputPass.value,
+    });
   });
 };
 
