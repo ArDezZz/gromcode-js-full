@@ -5,7 +5,7 @@ export function getUsersList() {
 }
 
 export function getUserById(userId) {
-  return fetch(`${baseUrl}/${userId}`).then(response => response.json());
+  return fetch(`${baseUrl}${userId}`).then(response => response.json());
 }
 
 export function createUser(userData) {
