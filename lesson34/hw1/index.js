@@ -19,13 +19,13 @@ export function createUser(userData) {
 }
 
 export function deleteUser(userId) {
-  return fetch(`${baseUrl}/${userId}`, {
+  return fetch(`${baseUrl}${userId}`, {
     method: 'DELETE',
   });
 }
 
 export function updateUser(userId, userData) {
-  return fetch(`${baseUrl}/${userId}`, {
+  return fetch(`${baseUrl}${userId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
