@@ -1,11 +1,11 @@
 const baseUrl = 'https://627ea7fc271f386ceffbc3ba.mockapi.io/api/v1/users/';
 
-function getUsersList() {
+export function getUsersList() {
   return fetch(baseUrl).then(response => response.json());
 }
 
 export function getUserById(userId) {
-  return fetch(`${baseUrl}${userId}`).then(response => response.json());
+  return fetch(`${baseUrl}/${userId}`).then(response => response.json());
 }
 
 export function createUser(userData) {
